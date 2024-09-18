@@ -8,6 +8,7 @@ const MyContext = createContext<ContextType>({} as ContextType)
 function Provider({ children }: { children: React.ReactNode }) {
   const [isName, setName] = useState('')
   const [isDark, setDark] = useState('light')
+  const [islanguage, setlanguage] = useState('light')
 
   useEffect(() => {
     const root = document.documentElement
@@ -25,6 +26,8 @@ function Provider({ children }: { children: React.ReactNode }) {
     setName,
     isDark,
     chargeDark,
+    islanguage,
+    setlanguage,
   }
 
   return (
