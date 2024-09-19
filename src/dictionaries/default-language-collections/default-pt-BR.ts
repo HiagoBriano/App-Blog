@@ -5,6 +5,13 @@ export const ptBR: defaultLanguageCollections = {
     name: 'YouTube Piloto',
     description: 'pt-br bbbbbbbbbbbbbbbbbb',
   },
+  menu: {
+    Services: 'Serviços',
+    Process: 'Processo',
+    Portfolio: 'Portfolio',
+    Testimonials: 'Depoimentos',
+    Contact: 'Contato',
+  },
   'Welcome {{name}}': 'Bem-vindo {{name}}',
   '{{nascimento}} {{idade}}': '{{nascimento}} {{idade}}',
 }
