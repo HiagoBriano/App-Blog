@@ -2,8 +2,8 @@ import { defaultLanguageCollections } from './interface'
 
 export const ptBR: defaultLanguageCollections = {
   site: {
-    name: 'YouTube Piloto',
-    description: 'pt-br bbbbbbbbbbbbbbbbbb',
+    name: 'Ionik - Blog',
+    description: 'Blog modelo',
   },
   menu: {
     Services: 'Serviços',

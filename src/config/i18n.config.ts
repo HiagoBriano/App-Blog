@@ -5,3 +5,8 @@ const locales = langs as unknown as string[]
 export const i18n = { defaultLocale, locales, localeDetection: true }
 
 export type Locale = (typeof langs)[number]
+
+export const TextOfThePlaces = {
+  'en-US': 'English (US)',
+  'pt-BR': 'Português (BR)',
+}

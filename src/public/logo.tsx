@@ -1,4 +1,4 @@
-export default function LogoIonik({
+export default function Logo({
   width,
   height,
   color = 'black',
