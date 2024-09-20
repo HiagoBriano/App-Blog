@@ -10,6 +10,7 @@ export const ptBR: defaultLanguageCollections = {
     administrator: 'Administrador',
     curious: 'Curioso',
   },
+  welcome: 'Bem-vindo a Ionik',
   'Welcome {{name}}': 'Bem-vindo {{name}}',
   '{{nascimento}} {{idade}}': '{{nascimento}} {{idade}}',
 }

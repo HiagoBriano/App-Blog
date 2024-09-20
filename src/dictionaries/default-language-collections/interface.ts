@@ -9,6 +9,7 @@ export interface defaultLanguageCollections {
     description: string
   }
   menu: IMenu
+  welcome: string
   'Welcome {{name}}': string
   '{{nascimento}} {{idade}}': string
 }
