@@ -29,11 +29,11 @@ export default async function RootLayout({
   children: React.ReactNode
   params: { lang: string }
 }) {
-  await getDictionaryServerOnly(params.lang as Locale)
+  getDictionaryServerOnly(params.lang as Locale)
 
   return (
     <html lang={`${params.lang}`}>
-      <body>
+      <body className="bg-slate-200 dark:bg-slate-700">
         <Provider>
           <>
             <Navbar />

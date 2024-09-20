@@ -1,9 +1,7 @@
 export interface IMenu {
-  Services: string
-  Process: string
-  Portfolio: string
-  Testimonials: string
-  Contact: string
+  administrator: string
+  dev: string
+  curious: string
 }
 export interface defaultLanguageCollections {
   site: {

@@ -28,7 +28,7 @@ export default function Logo({
         height="49.5"
         rx="24.75"
         stroke={color}
-        stroke-width="15.5"
+        strokeWidth="15.5"
       />
     </svg>
   )

@@ -1,11 +1,22 @@
 import FlagEnUS from './flag-en-US'
 import FlagPtBR from './flag-pt-BR'
 
-export default function Flag({ code }: { code: string }) {
+// Linda das mandeiras
+// https://nucleoapp.com/svg-flag-icons
+
+export default function Flag({
+  code,
+  width = 32,
+  height = 32,
+}: {
+  code: string
+  width?: number
+  height?: number
+}) {
   switch (code) {
     case 'en-US':
-      return <FlagEnUS />
+      return <FlagEnUS width={width} height={height} />
     default:
-      return <FlagPtBR />
+      return <FlagPtBR width={width} height={height} />
   }
 }

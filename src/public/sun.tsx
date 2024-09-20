@@ -13,10 +13,10 @@ export default function Sun() {
         r="22"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset=".724" stop-color="#ffed54" />
-        <stop offset=".779" stop-color="#ffe649" />
-        <stop offset=".877" stop-color="#ffd22d" />
-        <stop offset="1" stop-color="#ffb300" />
+        <stop offset=".724" stopColor="#ffed54" />
+        <stop offset=".779" stopColor="#ffe649" />
+        <stop offset=".877" stopColor="#ffd22d" />
+        <stop offset="1" stopColor="#ffb300" />
       </radialGradient>
       <path
         fill="url(#w~INujfpQanMh___D7Au2a)"
@@ -30,8 +30,8 @@ export default function Sun() {
         y2="35.996"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0" stop-color="#fed100" />
-        <stop offset="1" stop-color="#e36001" />
+        <stop offset="0" stopColor="#fed100" />
+        <stop offset="1" stopColor="#e36001" />
       </linearGradient>
       <path
         fill="url(#w~INujfpQanMh___D7Au2b)"
