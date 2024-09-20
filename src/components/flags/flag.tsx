@@ -1,7 +1,7 @@
 import FlagEnUS from './flag-en-US'
 import FlagPtBR from './flag-pt-BR'
 
-// Linda das mandeiras
+// Link das bandeiras
 // https://nucleoapp.com/svg-flag-icons
 
 export default function Flag({

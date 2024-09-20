@@ -158,8 +158,8 @@ export default function Navbar() {
 
         {/* Opções de menu */}
         <div
-          className={`items-center justify-between w-[93%] md:flex md:w-auto md:order-1 ${
-            isMenuOpen ? 'absolute mt-72 z-50 mr-28' : 'hidden'
+          className={`items-center justify-between w-[93%] md:flex  md:w-auto md:order-1 ${
+            isMenuOpen ? 'absolute z-50 mr-28 mt-52' : 'hidden'
           }`}
           id="navbar-sticky"
         >
@@ -169,7 +169,7 @@ export default function Navbar() {
             {Object.keys(menu).map((key) => (
               <li key={key}>
                 <Link
-                  href={menu[key as keyof typeof menu]}
+                  href={`/${lang}${menu[key as keyof typeof menu]}`}
                   className={`block py-2 px-3 relative group text-green-700 rounded  md:p-0  dark:text-green-300 dark:border-gray-700`}
                   aria-current="page"
                 >
