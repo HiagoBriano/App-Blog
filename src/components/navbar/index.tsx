@@ -4,8 +4,8 @@ import { getDictionaryUseClient } from '@/dictionaries/default-dictionary-use-cl
 import { IMenu } from '@/dictionaries/default-language-collections/interface'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 import { Locale, TextOfThePlaces } from '@/config/i18n.config'
-import { useMyContext } from '@/context/context'
 import React, { useEffect, useRef, useState } from 'react'
+import { useMyContext } from '@/context/context'
 import Night from '@/public/night'
 import Logo from '@/public/logo'
 import Flag from '../flags/flag'
@@ -84,9 +84,9 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`bg-white dark:bg-gray-800 ${
+      className={`bg-navbarBgColor dark:bg-dark_navbarBgColor ${
         isScroll
-          ? 'md:bg-white md:dark:bg-gray-800'
+          ? 'md:bg-navbarBgColor md:dark:bg-dark_navbarBgColor'
           : 'md:bg-transparent md:dark:bg-transparent'
       }`}
       aria-label="Main navigation"
@@ -188,7 +188,7 @@ export default function Navbar() {
               <li key={key}>
                 <Link
                   href={`/${lang}${menu[key as keyof typeof menu]}`}
-                  className={`block py-2 px-3 relative group text-green-700 rounded  md:p-0  dark:text-green-300 dark:border-gray-700`}
+                  className={`block py-2 px-3 relative group text-navbarTextColor rounded  md:p-0  dark:text-dark_navbarTextColor dark:border-gray-700`}
                   aria-current={
                     pathname.split('/' + lang).join('') ===
                     menu[key as keyof typeof menu]
@@ -198,7 +198,7 @@ export default function Navbar() {
                 >
                   {dictionary.menu[key as keyof typeof dictionary.menu]}
                   <span
-                    className={`absolute bottom-0 left-0 h-0.5 md:bg-[#00F585] dark:md:bg-[#b6edd4] transition-all duration-300 ${
+                    className={`absolute bottom-0 left-0 h-0.5 md:bg-navbarUnderlineColor dark:md:bg-dark_navbarUnderlineColor transition-all duration-300 ${
                       pathname.split('/' + lang).join('') ===
                       menu[key as keyof typeof menu]
                         ? 'w-full'

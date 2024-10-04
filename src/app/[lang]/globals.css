@@ -18,3 +18,15 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+:root {
+  /* light */
+  --navbarBgColor: #ffffff;
+  --navbarTextColor: #15803d;
+  --navbarUnderlineColor: #00f585;
+
+  /* dark */
+  --darkNavbarBgColor: #1f2937;
+  --darkNavbarTextColor: #86efac;
+  --darkNavbarUnderlineColor: #b6edd4;
+}

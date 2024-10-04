@@ -8,7 +8,17 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        navbarBgColor: 'var(--navbarBgColor)',
+        navbarTextColor: 'var(--navbarTextColor)',
+        navbarUnderlineColor: 'var(--navbarUnderlineColor)',
+
+        dark_navbarBgColor: 'var(--darkNavbarBgColor)',
+        dark_navbarTextColor: 'var(--darkNavbarTextColor)',
+        dark_navbarUnderlineColor: 'var(--darkNavbarUnderlineColor)',
+      },
+    },
   },
   plugins: [],
 }

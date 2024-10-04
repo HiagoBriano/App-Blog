@@ -5,10 +5,26 @@ import { ContextType } from './interface'
 
 const MyContext = createContext<ContextType>({} as ContextType)
 
+const LoadTheme = () => {
+  const db = {
+    navbarBgColor: '#FFFFFF',
+    navbarTextColor: '#15803d',
+    navbarUnderlineColor: '#00f585',
+    darkNavbarBgColor: '#1f2937',
+    darkNavbarTextColor: '#86efac',
+    darkNavbarUnderlineColor: '#b6edd4',
+  }
+
+  Object.keys(db).forEach((key) => {
+    document.documentElement.style.setProperty(
+      `--${key}`,
+      db[key as keyof typeof db]
+    )
+  })
+}
+
 function Provider({ children }: { children: React.ReactNode }) {
-  const [isName, setName] = useState('')
   const [isDark, setDark] = useState('light')
-  const [islanguage, setlanguage] = useState('')
 
   useEffect(() => {
     const theme = localStorage.getItem('theme')
@@ -18,6 +34,8 @@ function Provider({ children }: { children: React.ReactNode }) {
       root.classList.add(theme)
       setDark(theme)
     }
+
+    LoadTheme()
   }, [])
 
   const chargeDark = () => {
@@ -37,12 +55,8 @@ function Provider({ children }: { children: React.ReactNode }) {
   }
 
   const contextValue = {
-    isName,
-    setName,
     isDark,
     chargeDark,
-    islanguage,
-    setlanguage,
   }
 
   return (
