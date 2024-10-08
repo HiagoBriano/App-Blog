@@ -1,7 +1,6 @@
 import { getDictionaryServerOnly } from '@/dictionaries/default-dictionary-server-only'
 import { i18n, Locale } from '@/config/i18n.config'
 import { Provider } from '@/context/context'
-import Navbar from '@/components/navbar'
 import './globals.css'
 
 export async function generateStaticParams() {
@@ -35,10 +34,7 @@ export default async function RootLayout({
     <html lang={`${params.lang}`}>
       <body className="bg-slate-200 dark:bg-slate-700">
         <Provider>
-          <>
-            <Navbar />
-            {children}
-          </>
+          <>{children}</>
         </Provider>
       </body>
     </html>

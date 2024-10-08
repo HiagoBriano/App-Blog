@@ -78,7 +78,7 @@ export default function Navbar() {
 
   const menu: IMenu = {
     dev: '/dev',
-    administrator: '/admin',
+    administrator: '/administrator',
     curious: '/curious',
   }
 
@@ -96,7 +96,10 @@ export default function Navbar() {
           isScroll ? 'p-1' : 'p-4'
         } `}
       >
-        <Link href="/" className="flex items-center rtl:space-x-reverse">
+        <Link
+          href={`/${lang}`}
+          className="flex items-center rtl:space-x-reverse"
+        >
           <Logo
             width={90}
             height={48}

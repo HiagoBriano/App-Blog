@@ -2,7 +2,7 @@ import { getDictionaryServerOnly } from '@/dictionaries/default-dictionary-serve
 import { Locale } from '@/config/i18n.config'
 import Navbar from '@/components/navbar'
 
-export default function Dev({ params }: { params: { lang: Locale } }) {
+export default function Admin({ params }: { params: { lang: Locale } }) {
   const { dictionary, interpolation } = getDictionaryServerOnly(params.lang)
 
   return (
@@ -11,7 +11,7 @@ export default function Dev({ params }: { params: { lang: Locale } }) {
       <main className={`h-[150vh] flex items-center justify-center`}>
         <h1 className="text-3xl font-bold mb-4 dark:text-white">
           {interpolation(dictionary['Welcome {{name}}'], {
-            name: 'Hiago',
+            name: 'Maicon',
           })}
         </h1>
       </main>
