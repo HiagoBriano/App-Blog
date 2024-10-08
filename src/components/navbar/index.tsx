@@ -80,12 +80,13 @@ export default function Navbar() {
     dev: '/dev',
     administrator: '/administrator',
     curious: '/curious',
+    SignIn: '/auth',
   }
 
   return (
     <nav
       className={`bg-navbarBgColor dark:bg-dark_navbarBgColor ${
-        isScroll
+        isScroll || pathname.split('/' + lang).join('') === '/auth'
           ? 'md:bg-navbarBgColor md:dark:bg-dark_navbarBgColor'
           : 'md:bg-transparent md:dark:bg-transparent'
       }`}
@@ -93,7 +94,9 @@ export default function Navbar() {
     >
       <div
         className={`max-w-screen-xl flex flex-wrap items-center justify-between mx-auto transition ${
-          isScroll ? 'p-1' : 'p-4'
+          isScroll || pathname.split('/' + lang).join('') === '/auth'
+            ? 'p-1'
+            : 'p-4'
         } `}
       >
         <Link

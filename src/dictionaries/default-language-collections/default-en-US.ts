@@ -9,6 +9,7 @@ export const enUS: defaultLanguageCollections = {
     dev: 'Developer',
     administrator: 'Administrator',
     curious: 'Curious',
+    SignIn: 'Sign in',
   },
   welcome: 'Welcome to Ionik',
   'Welcome {{name}}': 'Welcome {{name}}',
@@ -27,6 +28,15 @@ export const enUS: defaultLanguageCollections = {
       email: 'Email',
       password: 'Password',
       confirmPassword: 'Confirm password',
+    },
+    error: {
+      name: 'The name must have at least 3 characters',
+      email: 'Invalid email',
+      password: 'Password must be at least 6 characters long',
+      differentPasswords: 'Passwords must be the same',
+      unauthorized: 'Invalid email or password',
+      emailAlreadyExists: 'Email already registered',
+      error: 'An unexpected error occurred',
     },
   },
 }

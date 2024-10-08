@@ -15,7 +15,10 @@ input {
   position: relative;
   width: 100%;
   background-color: #fff;
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  height: 100vh;
+  /* margin-top: 0.25rem; */
+  margin-top: 1.25rem;
   overflow: hidden;
 }
 

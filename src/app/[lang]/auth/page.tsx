@@ -1,10 +1,16 @@
 'use client'
 
 import { getDictionaryUseClient } from '@/dictionaries/default-dictionary-use-client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Register from '@/services/api/register'
 import { Locale } from '@/config/i18n.config'
 import { useParams } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import Login from '@/services/api/login'
+import { toast } from 'react-toastify'
 import Image from 'next/image'
 import React from 'react'
+import { z } from 'zod'
 import './style.css'
 
 const LoginForm = () => {
@@ -21,17 +27,65 @@ const LoginForm = () => {
     container!.classList.remove('login--sign-up-mode')
   }
 
-  const login = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    console.log(formData.get('email'))
-  }
+  const formRegisterSchema = z.object({
+    name: z.string().min(3, dictionary.auth.error.name),
+    email: z.string().email(dictionary.auth.error.email),
+    password: z.string().min(6, dictionary.auth.error.password),
+    confirmPassword: z.string().min(6, dictionary.auth.error.password),
+  })
 
-  const register = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    console.log(formData.get('newName'), formData.get('newEmail'))
-  }
+  const formRegister = useForm({
+    resolver: zodResolver(formRegisterSchema),
+  })
+
+  const formLoginSchema = z.object({
+    email: z.string().email(dictionary.auth.error.email),
+    password: z.string().min(6, dictionary.auth.error.password),
+  })
+
+  const formLogin = useForm({
+    resolver: zodResolver(formLoginSchema),
+  })
+
+  const login = formLogin.handleSubmit(async (data) => {
+    const { email, password } = data
+
+    const response = await Login(email, password)
+
+    if (!response.success) {
+      switch (response.message) {
+        case 'Unauthorized':
+          return toast.error(dictionary.auth.error.unauthorized)
+
+        default:
+          return toast.error(dictionary.auth.error.error)
+      }
+    }
+
+    return toast.success('Usuário logado com sucesso')
+  })
+
+  const register = formRegister.handleSubmit(async (data) => {
+    const { name, email, password, confirmPassword } = data
+
+    if (password !== confirmPassword) {
+      return toast.info(dictionary.auth.error.differentPasswords)
+    }
+
+    const response = await Register(name, email, password)
+
+    if (!response.success) {
+      switch (response.message) {
+        case 'email already registered':
+          return toast.error(dictionary.auth.error.emailAlreadyExists)
+
+        default:
+          return toast.error(dictionary.auth.error.error)
+      }
+    }
+
+    return toast.success('Usuário criado com sucesso')
+  })
 
   return (
     <div className="login--container">
@@ -43,18 +97,30 @@ const LoginForm = () => {
               <i className="login--fas login--fa-user"></i>
               <input
                 type="email"
-                name="email"
                 placeholder={dictionary.auth.form.email}
+                {...formLogin.register('email')}
               />
             </div>
+            {formLogin.formState.errors.email?.message && (
+              <p className="text-sm text-red-600">
+                {typeof formLogin.formState.errors.email.message === 'string' &&
+                  formLogin.formState.errors.email.message}
+              </p>
+            )}
             <div className="login--input-field">
               <i className="login--fas login--fa-lock"></i>
               <input
                 type="password"
-                name="password"
                 placeholder={dictionary.auth.form.password}
+                {...formLogin.register('password')}
               />
             </div>
+            {formLogin.formState.errors.password?.message && (
+              <p className="text-sm text-red-600">
+                {typeof formLogin.formState.errors.password.message ===
+                  'string' && formLogin.formState.errors.password.message}
+              </p>
+            )}
             <input
               type="submit"
               value={dictionary.auth.loginButton}
@@ -67,30 +133,59 @@ const LoginForm = () => {
               <i className="login--fas login--fa-user"></i>
               <input
                 type="text"
-                name="newName"
                 placeholder={dictionary.auth.form.name}
+                {...formRegister.register('name')}
               />
             </div>
+            {formRegister.formState.errors.name?.message && (
+              <p className="text-sm text-red-600">
+                {typeof formRegister.formState.errors.name.message ===
+                  'string' && formRegister.formState.errors.name.message}
+              </p>
+            )}
             <div className="login--input-field">
               <i className="login--fas login--fa-envelope"></i>
-              <input type="email" placeholder={dictionary.auth.form.email} />
+              <input
+                type="email"
+                placeholder={dictionary.auth.form.email}
+                {...formRegister.register('email')}
+              />
             </div>
+            {formRegister.formState.errors.email?.message && (
+              <p className="text-sm text-red-600">
+                {typeof formRegister.formState.errors.email.message ===
+                  'string' && formRegister.formState.errors.email.message}
+              </p>
+            )}
             <div className="login--input-field">
               <i className="login--fas login--fa-lock"></i>
               <input
                 type="password"
-                name="newPassword"
                 placeholder={dictionary.auth.form.password}
+                {...formRegister.register('password')}
               />
             </div>
+            {formRegister.formState.errors.password?.message && (
+              <p className="text-sm text-red-600">
+                {typeof formRegister.formState.errors.password.message ===
+                  'string' && formRegister.formState.errors.password.message}
+              </p>
+            )}
             <div className="login--input-field">
               <i className="login--fas login--fa-lock"></i>
               <input
                 type="password"
-                name="confirmPassword"
                 placeholder={dictionary.auth.form.confirmPassword}
+                {...formRegister.register('confirmPassword')}
               />
             </div>
+            {formRegister.formState.errors.confirmPassword?.message && (
+              <p className="text-sm text-red-600">
+                {typeof formRegister.formState.errors.confirmPassword
+                  .message === 'string' &&
+                  formRegister.formState.errors.confirmPassword.message}
+              </p>
+            )}
             <input
               type="submit"
               className="login--btn"

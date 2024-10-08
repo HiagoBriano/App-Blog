@@ -2,6 +2,7 @@ export interface IMenu {
   administrator: string
   dev: string
   curious: string
+  SignIn: string
 }
 export interface defaultLanguageCollections {
   site: {
@@ -26,6 +27,15 @@ export interface defaultLanguageCollections {
       email: string
       password: string
       confirmPassword: string
+    }
+    error: {
+      name: string
+      email: string
+      password: string
+      differentPasswords: string
+      unauthorized: string
+      emailAlreadyExists: string
+      error: string
     }
   }
 }

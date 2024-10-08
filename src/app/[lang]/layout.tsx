@@ -1,19 +1,18 @@
 import { getDictionaryServerOnly } from '@/dictionaries/default-dictionary-server-only'
 import { i18n, Locale } from '@/config/i18n.config'
+import { ToastContainer } from 'react-toastify'
 import { Provider } from '@/context/context'
+import 'react-toastify/dist/ReactToastify.css'
 import './globals.css'
+import Navbar from '@/components/navbar'
 
 export async function generateStaticParams() {
   const languages = i18n.locales.map((lang) => ({ lang }))
   return languages
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { lang: string }
-}) {
-  const { dictionary } = await getDictionaryServerOnly(params.lang as Locale)
+export function generateMetadata({ params }: { params: { lang: string } }) {
+  const { dictionary } = getDictionaryServerOnly(params.lang as Locale)
 
   return {
     title: dictionary.site.name,
@@ -34,7 +33,11 @@ export default async function RootLayout({
     <html lang={`${params.lang}`}>
       <body className="bg-slate-200 dark:bg-slate-700">
         <Provider>
-          <>{children}</>
+          <>
+            <Navbar />
+            <ToastContainer style={{ zIndex: 999 }} />
+            {children}
+          </>
         </Provider>
       </body>
     </html>
