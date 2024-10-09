@@ -31,7 +31,7 @@ export default async function RootLayout({
 
   return (
     <html lang={`${params.lang}`}>
-      <body className="bg-slate-200 dark:bg-slate-700">
+      <body className="bg-background dark:bg-dark_Background">
         <Provider>
           <>
             <Navbar />

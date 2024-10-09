@@ -7,12 +7,17 @@ const MyContext = createContext<ContextType>({} as ContextType)
 
 const LoadTheme = () => {
   const db = {
-    navbarBgColor: '#FFFFFF',
-    navbarTextColor: '#15803d',
-    navbarUnderlineColor: '#00f585',
-    darkNavbarBgColor: '#1f2937',
-    darkNavbarTextColor: '#86efac',
-    darkNavbarUnderlineColor: '#b6edd4',
+    // light
+    navbar_BgColor: '#FFFFFF',
+    navbar_TextColor: '#15803d',
+    navbar_UnderlineColor: '#00f585',
+    background: '#e2e8f0',
+
+    // dark
+    dark_Navbar_BgColor: '#1f2937',
+    dark_Navbar_TextColor: '#86efac',
+    dark_Navbar_UnderlineColor: '#b6edd4',
+    dark_Background: '#334155',
   }
 
   Object.keys(db).forEach((key) => {

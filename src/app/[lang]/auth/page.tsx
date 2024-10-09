@@ -92,7 +92,9 @@ const LoginForm = () => {
       <div className="login--forms-container">
         <div className="login--signin-signup">
           <form onSubmit={login} className="login--sign-in-form">
-            <h2 className="login--title">{dictionary.auth.login}</h2>
+            <h2 className="login--title dark:text-slate-200">
+              {dictionary.auth.login}
+            </h2>
             <div className="login--input-field">
               <i className="login--fas login--fa-user"></i>
               <input
@@ -128,7 +130,9 @@ const LoginForm = () => {
             />
           </form>
           <form onSubmit={register} className="login--sign-up-form">
-            <h2 className="login--title">{dictionary.auth.register}</h2>
+            <h2 className="login--title dark:text-slate-200">
+              {dictionary.auth.register}
+            </h2>
             <div className="login--input-field">
               <i className="login--fas login--fa-user"></i>
               <input

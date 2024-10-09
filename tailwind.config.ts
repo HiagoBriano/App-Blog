@@ -10,13 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        navbarBgColor: 'var(--navbarBgColor)',
-        navbarTextColor: 'var(--navbarTextColor)',
-        navbarUnderlineColor: 'var(--navbarUnderlineColor)',
+        navbarBgColor: 'var(--navbar_BgColor)',
+        navbarTextColor: 'var(--navbar_TextColor)',
+        navbarUnderlineColor: 'var(--navbar_UnderlineColor)',
+        background: 'var(--background)',
 
-        dark_navbarBgColor: 'var(--darkNavbarBgColor)',
-        dark_navbarTextColor: 'var(--darkNavbarTextColor)',
-        dark_navbarUnderlineColor: 'var(--darkNavbarUnderlineColor)',
+        dark_navbarBgColor: 'var(--dark_Navbar_BgColor)',
+        dark_navbarTextColor: 'var(--dark_Navbar_TextColor)',
+        dark_navbarUnderlineColor: 'var(--dark_Navbar_UnderlineColor)',
+        dark_Background: 'var(--dark_Background)',
       },
     },
   },
