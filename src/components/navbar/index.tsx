@@ -12,6 +12,7 @@ import Flag from '../flags/flag'
 import Sun from '@/public/sun'
 import Link from 'next/link'
 import './style.css'
+import { getCookie } from 'cookies-next'
 
 export default function Navbar() {
   const [isLocalOpen, setIsLocalOpen] = useState(false)
@@ -81,6 +82,7 @@ export default function Navbar() {
     administrator: '/administrator',
     curious: '/curious',
     SignIn: '/auth',
+    dashboard: '/dashboard',
   }
 
   return (
@@ -190,30 +192,37 @@ export default function Navbar() {
               'bg-gray-50 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900'
             } flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:border-gray-700`}
           >
-            {Object.keys(menu).map((key) => (
-              <li key={key}>
-                <Link
-                  href={`/${lang}${menu[key as keyof typeof menu]}`}
-                  className={`block py-2 px-3 relative group text-navbarTextColor rounded  md:p-0  dark:text-dark_navbarTextColor dark:border-gray-700`}
-                  aria-current={
-                    pathname.split('/' + lang).join('') ===
-                    menu[key as keyof typeof menu]
-                      ? 'page'
-                      : undefined
-                  }
-                >
-                  {dictionary.menu[key as keyof typeof dictionary.menu]}
-                  <span
-                    className={`absolute bottom-0 left-0 h-0.5 md:bg-navbarUnderlineColor dark:md:bg-dark_navbarUnderlineColor transition-all duration-300 ${
+            {Object.keys(menu).map((key) => {
+              console.log(key)
+
+              if (key === 'SignIn' && getCookie('user')) return null
+              if (key === 'dashboard' && !getCookie('user')) return null
+
+              return (
+                <li key={key}>
+                  <Link
+                    href={`/${lang}${menu[key as keyof typeof menu]}`}
+                    className={`block py-2 px-3 relative group text-navbarTextColor rounded  md:p-0  dark:text-dark_navbarTextColor dark:border-gray-700`}
+                    aria-current={
                       pathname.split('/' + lang).join('') ===
                       menu[key as keyof typeof menu]
-                        ? 'w-full'
-                        : 'w-0 group-hover:w-full'
-                    }`}
-                  />
-                </Link>
-              </li>
-            ))}
+                        ? 'page'
+                        : undefined
+                    }
+                  >
+                    {dictionary.menu[key as keyof typeof dictionary.menu]}
+                    <span
+                      className={`absolute bottom-0 left-0 h-0.5 md:bg-navbarUnderlineColor dark:md:bg-dark_navbarUnderlineColor transition-all duration-300 ${
+                        pathname.split('/' + lang).join('') ===
+                        menu[key as keyof typeof menu]
+                          ? 'w-full'
+                          : 'w-0 group-hover:w-full'
+                      }`}
+                    />
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </div>
       </div>

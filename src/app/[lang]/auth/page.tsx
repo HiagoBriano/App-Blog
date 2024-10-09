@@ -1,10 +1,11 @@
 'use client'
 
 import { getDictionaryUseClient } from '@/dictionaries/default-dictionary-use-client'
+import { useRouter, useParams } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { getCookie, setCookie } from 'cookies-next'
 import Register from '@/services/api/register'
 import { Locale } from '@/config/i18n.config'
-import { useParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import Login from '@/services/api/login'
 import { toast } from 'react-toastify'
@@ -14,7 +15,13 @@ import { z } from 'zod'
 import './style.css'
 
 const LoginForm = () => {
+  const router = useRouter()
   const { lang } = useParams()
+
+  if (getCookie('user')) {
+    router.push(`/${lang}/dashboard`)
+  }
+
   const { dictionary } = getDictionaryUseClient(lang as Locale)
 
   const signUp = () => {
@@ -62,7 +69,24 @@ const LoginForm = () => {
       }
     }
 
-    return toast.success('Usuário logado com sucesso')
+    setCookie(
+      'user',
+      JSON.stringify({
+        name: response.data!.name,
+        email: response.data!.email,
+        photo: response.data!.photo,
+        role: response.data!.role,
+        access_token: response.data!.access_token,
+      }),
+      {
+        secure: true,
+        sameSite: 'strict',
+        maxAge: 60 * 60 * 4,
+        path: '/',
+      }
+    )
+
+    router.push(`/${lang}/dashboard`)
   })
 
   const register = formRegister.handleSubmit(async (data) => {

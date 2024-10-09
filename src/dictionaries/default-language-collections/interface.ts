@@ -3,6 +3,7 @@ export interface IMenu {
   dev: string
   curious: string
   SignIn: string
+  dashboard: string
 }
 export interface defaultLanguageCollections {
   site: {

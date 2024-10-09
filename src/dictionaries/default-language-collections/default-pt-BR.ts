@@ -10,6 +10,7 @@ export const ptBR: defaultLanguageCollections = {
     administrator: 'Administrador',
     curious: 'Curioso',
     SignIn: 'Login',
+    dashboard: 'Painel',
   },
   welcome: 'Bem-vindo a Ionik',
   'Welcome {{name}}': 'Bem-vindo {{name}}',

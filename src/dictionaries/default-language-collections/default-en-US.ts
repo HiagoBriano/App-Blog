@@ -10,6 +10,7 @@ export const enUS: defaultLanguageCollections = {
     administrator: 'Administrator',
     curious: 'Curious',
     SignIn: 'Sign in',
+    dashboard: 'Dashboard',
   },
   welcome: 'Welcome to Ionik',
   'Welcome {{name}}': 'Welcome {{name}}',

@@ -28,9 +28,10 @@ const Login = async (email: string, password: string) => {
       body: JSON.stringify({ email, password }),
       cache: 'no-store',
     })
-    const data = await response.json()
 
-    return data as IResponseLogin
+    const data: IResponseLogin = await response.json()
+
+    return data
   } catch (error) {
     console.log(error)
 
