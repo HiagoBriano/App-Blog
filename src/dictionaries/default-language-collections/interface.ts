@@ -2,15 +2,20 @@ export interface IMenu {
   administrator: string
   dev: string
   curious: string
-  SignIn: string
-  dashboard: string
 }
 export interface defaultLanguageCollections {
   site: {
     name: string
     description: string
   }
-  menu: IMenu
+  navbar: {
+    menu: IMenu
+    user: {
+      signIn: string
+      dashboard: string
+      signOut: string
+    }
+  }
   welcome: string
   'Welcome {{name}}': string
   '{{nascimento}} {{idade}}': string

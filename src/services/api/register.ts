@@ -18,7 +18,7 @@ export interface IResponseRegister {
   } | null
 }
 
-const Register = async (name: string, email: string, password: string) => {
+const RegisterAPI = async (name: string, email: string, password: string) => {
   try {
     const response = await fetch(`${API_URL}/users`, {
       method: 'POST',
@@ -43,4 +43,4 @@ const Register = async (name: string, email: string, password: string) => {
   }
 }
 
-export default Register
+export default RegisterAPI

@@ -5,12 +5,17 @@ export const enUS: defaultLanguageCollections = {
     name: 'Ionik - Blog',
     description: 'Model blog',
   },
-  menu: {
-    dev: 'Developer',
-    administrator: 'Administrator',
-    curious: 'Curious',
-    SignIn: 'Sign in',
-    dashboard: 'Dashboard',
+  navbar: {
+    menu: {
+      dev: 'Developer',
+      administrator: 'Administrator',
+      curious: 'Curious',
+    },
+    user: {
+      signIn: 'Sign in',
+      dashboard: 'Dashboard',
+      signOut: 'Sign out',
+    },
   },
   welcome: 'Welcome to Ionik',
   'Welcome {{name}}': 'Welcome {{name}}',

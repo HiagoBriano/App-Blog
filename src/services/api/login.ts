@@ -18,7 +18,7 @@ export interface IResponseLogin {
   }
 }
 
-const Login = async (email: string, password: string) => {
+const LoginAPI = async (email: string, password: string) => {
   try {
     const response = await fetch(`${API_URL}/auth`, {
       method: 'POST',
@@ -43,4 +43,4 @@ const Login = async (email: string, password: string) => {
   }
 }
 
-export default Login
+export default LoginAPI

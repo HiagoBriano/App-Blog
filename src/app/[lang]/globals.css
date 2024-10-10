@@ -20,15 +20,8 @@
 }
 
 :root {
-  /* light */
   --navbar_BgColor: #ffffff;
   --navbar_TextColor: #15803d;
   --navbar_UnderlineColor: #00f585;
   --background: #e2e8f0;
-
-  /* dark */
-  --dark_Navbar_BgColor: #1f2937;
-  --dark_Navbar_TextColor: #86efac;
-  --dark_Navbar_UnderlineColor: #b6edd4;
-  --dark_Background: #334155;
 }

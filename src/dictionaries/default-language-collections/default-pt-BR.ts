@@ -5,12 +5,18 @@ export const ptBR: defaultLanguageCollections = {
     name: 'Ionik - Blog',
     description: 'Blog modelo',
   },
-  menu: {
-    dev: 'Desenvolvedor',
-    administrator: 'Administrador',
-    curious: 'Curioso',
-    SignIn: 'Login',
-    dashboard: 'Painel',
+
+  navbar: {
+    menu: {
+      dev: 'Desenvolvedor',
+      administrator: 'Administrador',
+      curious: 'Curioso',
+    },
+    user: {
+      signIn: 'Entrar',
+      dashboard: 'Painel',
+      signOut: 'Sair',
+    },
   },
   welcome: 'Bem-vindo a Ionik',
   'Welcome {{name}}': 'Bem-vindo {{name}}',

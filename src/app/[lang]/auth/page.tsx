@@ -4,10 +4,10 @@ import { getDictionaryUseClient } from '@/dictionaries/default-dictionary-use-cl
 import { useRouter, useParams } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { getCookie, setCookie } from 'cookies-next'
-import Register from '@/services/api/register'
+import RegisterAPI from '@/services/api/register'
 import { Locale } from '@/config/i18n.config'
+import LoginAPI from '@/services/api/login'
 import { useForm } from 'react-hook-form'
-import Login from '@/services/api/login'
 import { toast } from 'react-toastify'
 import Image from 'next/image'
 import React from 'react'
@@ -57,7 +57,7 @@ const LoginForm = () => {
   const login = formLogin.handleSubmit(async (data) => {
     const { email, password } = data
 
-    const response = await Login(email, password)
+    const response = await LoginAPI(email, password)
 
     if (!response.success) {
       switch (response.message) {
@@ -96,7 +96,7 @@ const LoginForm = () => {
       return toast.info(dictionary.auth.error.differentPasswords)
     }
 
-    const response = await Register(name, email, password)
+    const response = await RegisterAPI(name, email, password)
 
     if (!response.success) {
       switch (response.message) {
@@ -108,7 +108,24 @@ const LoginForm = () => {
       }
     }
 
-    return toast.success('Usuário criado com sucesso')
+    setCookie(
+      'user',
+      JSON.stringify({
+        name: response.data!.name,
+        email: response.data!.email,
+        photo: response.data!.photo,
+        role: response.data!.role,
+        access_token: response.data!.access_token,
+      }),
+      {
+        secure: true,
+        sameSite: 'strict',
+        maxAge: 60 * 60 * 4,
+        path: '/',
+      }
+    )
+
+    router.push(`/${lang}/dashboard`)
   })
 
   return (
@@ -116,9 +133,7 @@ const LoginForm = () => {
       <div className="login--forms-container">
         <div className="login--signin-signup">
           <form onSubmit={login} className="login--sign-in-form">
-            <h2 className="login--title dark:text-slate-200">
-              {dictionary.auth.login}
-            </h2>
+            <h2 className="login--title ">{dictionary.auth.login}</h2>
             <div className="login--input-field">
               <i className="login--fas login--fa-user"></i>
               <input
@@ -154,9 +169,7 @@ const LoginForm = () => {
             />
           </form>
           <form onSubmit={register} className="login--sign-up-form">
-            <h2 className="login--title dark:text-slate-200">
-              {dictionary.auth.register}
-            </h2>
+            <h2 className="login--title ">{dictionary.auth.register}</h2>
             <div className="login--input-field">
               <i className="login--fas login--fa-user"></i>
               <input
