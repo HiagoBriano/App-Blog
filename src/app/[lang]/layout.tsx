@@ -55,7 +55,7 @@ export default async function RootLayout({
 
   fetch(`${API_URL}/`, {
     method: 'GET',
-    next: { revalidate: 1800 },
+    next: { revalidate: 300 },
   })
 
   // As cores vão ser buscadas do banco de dados

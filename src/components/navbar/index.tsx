@@ -262,11 +262,11 @@ export default function Navbar() {
                   <ul className="py-2" aria-labelledby="user-menu-button">
                     <li>
                       <Link
-                        href={`/${lang}/dashboard`}
+                        href={`/${lang}/profile`}
                         onClick={() => setIsMenuUserOpen(false)}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
-                        {dictionary.navbar.user.Profile}
+                        {dictionary.navbar.user.profile}
                       </Link>
                     </li>
                     <li>

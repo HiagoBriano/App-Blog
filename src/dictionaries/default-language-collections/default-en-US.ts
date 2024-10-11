@@ -13,7 +13,7 @@ export const enUS: defaultLanguageCollections = {
     },
     user: {
       signIn: 'Sign in',
-      Profile: 'Profile',
+      profile: 'Profile',
       dashboard: 'Dashboard',
       signOut: 'Sign out',
     },

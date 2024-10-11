@@ -14,7 +14,7 @@ export const ptBR: defaultLanguageCollections = {
     },
     user: {
       signIn: 'Entrar',
-      Profile: 'Perfil',
+      profile: 'Perfil',
       dashboard: 'Painel',
       signOut: 'Sair',
     },
