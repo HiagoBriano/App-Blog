@@ -13,6 +13,7 @@ export const enUS: defaultLanguageCollections = {
     },
     user: {
       signIn: 'Sign in',
+      Profile: 'Profile',
       dashboard: 'Dashboard',
       signOut: 'Sign out',
     },
@@ -36,7 +37,7 @@ export const enUS: defaultLanguageCollections = {
       confirmPassword: 'Confirm password',
     },
     error: {
-      name: 'The name must have at least 3 characters',
+      name: 'Invalid name',
       email: 'Invalid email',
       password: 'Password must be at least 6 characters long',
       differentPasswords: 'Passwords must be the same',

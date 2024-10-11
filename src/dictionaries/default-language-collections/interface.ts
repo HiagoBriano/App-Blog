@@ -12,6 +12,7 @@ export interface defaultLanguageCollections {
     menu: IMenu
     user: {
       signIn: string
+      Profile: string
       dashboard: string
       signOut: string
     }

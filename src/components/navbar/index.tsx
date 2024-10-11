@@ -7,7 +7,6 @@ import { Locale, TextOfThePlaces } from '@/config/i18n.config'
 import React, { useEffect, useRef, useState } from 'react'
 import { deleteCookie, getCookie } from 'cookies-next'
 import { IUser } from '@/interfaces/user'
-import Logo from '@/public/logo'
 import Flag from '../flags/flag'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -73,27 +72,6 @@ export default function Navbar() {
   }, [isMenuUserOpen])
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownMenuRef.current &&
-        !dropdownMenuRef.current.contains(event.target as Node)
-      ) {
-        setIsMenuOpen(false)
-      }
-    }
-
-    if (isMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [isMenuOpen])
-
-  useEffect(() => {
     const scrollListener = () => {
       if (window.scrollY > 10) {
         setScroll(true)
@@ -109,12 +87,31 @@ export default function Navbar() {
     }
   }, [])
 
-  const handleToggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
   const handleToggleLocal = () => {
     setIsLocalOpen(!isLocalOpen)
+  }
+
+  const handleToggleMenu = () => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownMenuRef.current &&
+        !dropdownMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    if (!isMenuOpen) {
+      setIsMenuOpen(true)
+      document.addEventListener('mousedown', handleClickOutside)
+    } else {
+      setIsMenuOpen(false)
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
   }
 
   const getPathname = (lng: string) => {
@@ -153,7 +150,16 @@ export default function Navbar() {
           href={`/${lang}`}
           className="flex items-center rtl:space-x-reverse"
         >
-          <Logo width={90} height={48} color={'black'} />
+          <div
+            className="w-8 h-8 rounded-full logo"
+            style={{
+              backgroundImage: 'var(--logo-url)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              width: '90px',
+              height: '48px',
+            }}
+          />
         </Link>
 
         <div className="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -183,7 +189,10 @@ export default function Navbar() {
                   return (
                     <li key={key} role="none">
                       <button
-                        onClick={() => router.push(getPathname(key))}
+                        onClick={() => {
+                          router.push(getPathname(key))
+                          setIsLocalOpen(false)
+                        }}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         role="menuitem"
                       >
@@ -254,6 +263,16 @@ export default function Navbar() {
                     <li>
                       <Link
                         href={`/${lang}/dashboard`}
+                        onClick={() => setIsMenuUserOpen(false)}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        {dictionary.navbar.user.Profile}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href={`/${lang}/dashboard`}
+                        onClick={() => setIsMenuUserOpen(false)}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
                         {dictionary.navbar.user.dashboard}
@@ -261,7 +280,10 @@ export default function Navbar() {
                     </li>
                     <li>
                       <button
-                        onClick={signOut}
+                        onClick={() => {
+                          signOut()
+                          setIsMenuUserOpen(false)
+                        }}
                         className="flex justify-start items-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
                         {dictionary.navbar.user.signOut}
@@ -274,6 +296,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href={`/${lang}/auth`}
+                      onClick={() => setIsMenuUserOpen(false)}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       {dictionary.navbar.user.signIn}

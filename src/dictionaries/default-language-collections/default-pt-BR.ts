@@ -14,6 +14,7 @@ export const ptBR: defaultLanguageCollections = {
     },
     user: {
       signIn: 'Entrar',
+      Profile: 'Perfil',
       dashboard: 'Painel',
       signOut: 'Sair',
     },
@@ -37,7 +38,7 @@ export const ptBR: defaultLanguageCollections = {
       confirmPassword: 'Confirme sua senha',
     },
     error: {
-      name: 'O nome deve ter no mínimo 3 caracteres',
+      name: 'Nome inválido',
       email: 'E-mail inválido',
       password: 'A senha deve ter no mínimo 6 caracteres',
       differentPasswords: 'As senhas devem ser iguais',
