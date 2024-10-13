@@ -1,15 +1,16 @@
 'use client'
 
+import { getDictionaryUseClient } from '@/dictionaries/default-dictionary-use-client'
+import { UpdateUserImageAPI } from '@/services/api/update-user-image'
+import { GetDataUserAPI } from '@/services/api/get-data-user'
+import { UpdateUserAPI } from '@/services/api/update-user'
 import UploadImage from '@/components/uploadImage'
 import { Locale } from '@/config/i18n.config'
+import { useEffect, useState } from 'react'
 import { redirect } from 'next/navigation'
 import { IUser } from '@/interfaces/user'
-import { useEffect, useState } from 'react'
-import { getDictionaryUseClient } from '@/dictionaries/default-dictionary-use-client'
 import { getCookie } from 'cookies-next'
-import { GetDataUserAPI } from '@/services/api/get-data-user'
 import { toast } from 'react-toastify'
-import { UpdateUserAPI } from '@/services/api/update-user'
 
 export default function Profile({ params }: { params: { lang: Locale } }) {
   const userCookie = getCookie('user')
@@ -24,6 +25,7 @@ export default function Profile({ params }: { params: { lang: Locale } }) {
   const [isName, setName] = useState('')
   const [isEmail, setEmail] = useState('')
   const [isPhone, setPhone] = useState('')
+  const [isImage, setImage] = useState<string | null>(null)
 
   function phoneMask(value: string) {
     value = value.replace(/\D/g, '')
@@ -39,6 +41,7 @@ export default function Profile({ params }: { params: { lang: Locale } }) {
       if (response.success) {
         setName(response.data!.name)
         setEmail(response.data!.email)
+        setImage(response.data!.photo)
         if (response.data!.phone) setPhone(phoneMask(response.data!.phone))
       }
     }
@@ -73,13 +76,29 @@ export default function Profile({ params }: { params: { lang: Locale } }) {
     toast.success('Informações atualizadas com sucesso!')
   }
 
+  const updateUserImage = async (image: string) => {
+    const response = await UpdateUserImageAPI(
+      userData.access_token,
+      userData.id,
+      image
+    )
+
+    if (!response.success) return toast.error(dictionary.error.error)
+
+    setImage(image)
+
+    toast.success('Imagem atualizada com sucesso!')
+  }
+
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen ">
       <UploadImage
-        isStyle=""
+        isRound={true}
         styleBorder="border-4 border-navbarUnderlineColor"
-        defaultImage={userData.photo || '/avatar.png'}
+        isImage={isImage || '/avatar.png'}
+        action={updateUserImage}
       />
+
       <form className="w-4/5 md:w-2/5 md:max-w-[700px] flex flex-col items-center justify-center">
         <div className="relative z-0 w-full mb-7 mt-6 group">
           <input
@@ -138,7 +157,7 @@ export default function Profile({ params }: { params: { lang: Locale } }) {
         <button
           type="button"
           onClick={updateUser}
-          className="text-white bg-blue-800 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+          className="w-full md:w-28 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
         >
           {dictionary.form.save}
         </button>
