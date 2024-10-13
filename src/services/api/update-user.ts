@@ -28,8 +28,6 @@ export async function UpdateUserAPI(
   { name, phone }: IDataUpdate
 ) {
   try {
-    console.log('token', token)
-
     const response = await fetch(`${API_URL}/users/${id}`, {
       method: 'PUT',
       headers: {

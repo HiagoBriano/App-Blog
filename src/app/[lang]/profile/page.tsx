@@ -7,20 +7,24 @@ import { UpdateUserAPI } from '@/services/api/update-user'
 import UploadImage from '@/components/uploadImage'
 import { Locale } from '@/config/i18n.config'
 import { useEffect, useState } from 'react'
-import { redirect } from 'next/navigation'
 import { IUser } from '@/interfaces/user'
 import { getCookie } from 'cookies-next'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 export default function Profile({ params }: { params: { lang: Locale } }) {
   const userCookie = getCookie('user')
+  const router = useRouter()
+  let userData: IUser
 
-  if (!userCookie) {
-    redirect(`/${params.lang}/auth`)
+  try {
+    userData = JSON.parse(userCookie as string) as IUser
+  } catch (error) {
+    console.log(error)
+    router.push(`/${params.lang}/auth`)
   }
 
   const { dictionary } = getDictionaryUseClient(params.lang)
-  const userData: IUser = JSON.parse(userCookie)
 
   const [isName, setName] = useState('')
   const [isEmail, setEmail] = useState('')
@@ -59,14 +63,16 @@ export default function Profile({ params }: { params: { lang: Locale } }) {
       return
     }
 
-    if (isPhone.length < 10 || isPhone.length > 11) {
+    const phone = isPhone.replace(/[^0-9]/g, '')
+
+    if (phone.length < 10 || phone.length > 11) {
       toast.error(dictionary.form.errorPhone)
       return
     }
 
     const response = await UpdateUserAPI(userData.access_token, userData.id, {
       name: isName,
-      phone: isPhone,
+      phone: phone,
     })
 
     if (!response.success) {
