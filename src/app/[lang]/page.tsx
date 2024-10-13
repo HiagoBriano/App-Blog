@@ -11,7 +11,7 @@ export default function Home({ params }: { params: { lang: string } }) {
       <Navbar />
       <main className={`h-[150vh] flex items-center justify-center`}>
         <h1 className="text-3xl font-bold mb-4 dark:text-white">
-          {dictionary.welcome}
+          {dictionary.greetings.welcome}
         </h1>
       </main>
     </>

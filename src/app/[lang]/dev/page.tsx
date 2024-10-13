@@ -8,7 +8,7 @@ export default function Dev({ params }: { params: { lang: Locale } }) {
     <>
       <main className={`h-[150vh] flex items-center justify-center`}>
         <h1 className="text-3xl font-bold mb-4 dark:text-white">
-          {interpolation(dictionary['Welcome {{name}}'], {
+          {interpolation(dictionary.greetings['Welcome {{name}}'], {
             name: 'Hiago',
           })}
         </h1>

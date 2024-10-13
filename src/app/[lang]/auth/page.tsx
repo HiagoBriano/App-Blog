@@ -35,10 +35,10 @@ const LoginForm = () => {
   }
 
   const formRegisterSchema = z.object({
-    name: z.string().min(3, dictionary.auth.error.name),
-    email: z.string().email(dictionary.auth.error.email),
-    password: z.string().min(6, dictionary.auth.error.password),
-    confirmPassword: z.string().min(6, dictionary.auth.error.password),
+    name: z.string().min(3, dictionary.form.errorName),
+    email: z.string().email(dictionary.form.errorEmail),
+    password: z.string().min(6, dictionary.form.errorPassword),
+    confirmPassword: z.string().min(6, dictionary.form.errorPassword),
   })
 
   const formRegister = useForm({
@@ -46,8 +46,8 @@ const LoginForm = () => {
   })
 
   const formLoginSchema = z.object({
-    email: z.string().email(dictionary.auth.error.email),
-    password: z.string().min(6, dictionary.auth.error.password),
+    email: z.string().email(dictionary.form.errorEmail),
+    password: z.string().min(6, dictionary.form.errorPassword),
   })
 
   const formLogin = useForm({
@@ -62,16 +62,17 @@ const LoginForm = () => {
     if (!response.success) {
       switch (response.message) {
         case 'Unauthorized':
-          return toast.error(dictionary.auth.error.unauthorized)
+          return toast.error(dictionary.error.unauthorized)
 
         default:
-          return toast.error(dictionary.auth.error.error)
+          return toast.error(dictionary.error.error)
       }
     }
 
     setCookie(
       'user',
       JSON.stringify({
+        id: response.data!.id,
         name: response.data!.name,
         email: response.data!.email,
         photo: response.data!.photo,
@@ -93,7 +94,7 @@ const LoginForm = () => {
     const { name, email, password, confirmPassword } = data
 
     if (password !== confirmPassword) {
-      return toast.info(dictionary.auth.error.differentPasswords)
+      return toast.info(dictionary.error.differentPasswords)
     }
 
     const response = await RegisterAPI(name, email, password)
@@ -101,10 +102,10 @@ const LoginForm = () => {
     if (!response.success) {
       switch (response.message) {
         case 'email already registered':
-          return toast.error(dictionary.auth.error.emailAlreadyExists)
+          return toast.error(dictionary.error.emailAlreadyExists)
 
         default:
-          return toast.error(dictionary.auth.error.error)
+          return toast.error(dictionary.error.error)
       }
     }
 
@@ -138,7 +139,7 @@ const LoginForm = () => {
               <i className="login--fas login--fa-user"></i>
               <input
                 type="email"
-                placeholder={dictionary.auth.form.email}
+                placeholder={dictionary.form.email}
                 {...formLogin.register('email')}
               />
             </div>
@@ -152,7 +153,7 @@ const LoginForm = () => {
               <i className="login--fas login--fa-lock"></i>
               <input
                 type="password"
-                placeholder={dictionary.auth.form.password}
+                placeholder={dictionary.form.password}
                 {...formLogin.register('password')}
               />
             </div>
@@ -174,7 +175,7 @@ const LoginForm = () => {
               <i className="login--fas login--fa-user"></i>
               <input
                 type="text"
-                placeholder={dictionary.auth.form.name}
+                placeholder={dictionary.form.name}
                 {...formRegister.register('name')}
               />
             </div>
@@ -188,7 +189,7 @@ const LoginForm = () => {
               <i className="login--fas login--fa-envelope"></i>
               <input
                 type="email"
-                placeholder={dictionary.auth.form.email}
+                placeholder={dictionary.form.email}
                 {...formRegister.register('email')}
               />
             </div>
@@ -202,7 +203,7 @@ const LoginForm = () => {
               <i className="login--fas login--fa-lock"></i>
               <input
                 type="password"
-                placeholder={dictionary.auth.form.password}
+                placeholder={dictionary.form.password}
                 {...formRegister.register('password')}
               />
             </div>
@@ -216,7 +217,7 @@ const LoginForm = () => {
               <i className="login--fas login--fa-lock"></i>
               <input
                 type="password"
-                placeholder={dictionary.auth.form.confirmPassword}
+                placeholder={dictionary.form.confirmPassword}
                 {...formRegister.register('confirmPassword')}
               />
             </div>
