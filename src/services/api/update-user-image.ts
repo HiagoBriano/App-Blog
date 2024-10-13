@@ -34,7 +34,8 @@ export async function UpdateUserImageAPI(
       uintArray[i] = byteString.charCodeAt(i)
     }
 
-    const blob = new Blob([arrayBuffer], { type: mimeString })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const blob = new Blob([arrayBuffer], { type: mimeString }) as any
 
     const compressedBlob = await imageCompression(blob, {
       maxSizeMB: 1, // Limit to 1MB (adjust as needed)

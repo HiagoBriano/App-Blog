@@ -67,8 +67,9 @@ export default function UploadImage({
   }
 
   const imageCropper = () => {
-    const imageElement = cropperRef?.current
-    const cropper = imageElement?.cropper
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const imageElement = cropperRef?.current as any
+    const cropper = imageElement!.cropper
     const img = cropper.getCroppedCanvas().toDataURL()
     setOpenCropper(false)
     action(img)
