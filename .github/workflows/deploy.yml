@@ -14,12 +14,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    # Configurar o Node.js
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '22.x'
-
     # Step 2: Configurar o SSH
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.7.0
@@ -34,30 +28,12 @@ jobs:
     - name: Deploy to VPS
       run: |
         ssh hiago@62.72.9.87 << 'EOF'
-          # Verificar se o pm2 está instalado
-          if ! command -v pm2 &> /dev/null; then
-            echo "pm2 não encontrado, instalando..."
-            npm install -g pm2
-          fi
-
-          # Navegar para a pasta do projeto
+          # Atualizar Node.js e dependências, se necessário
           cd /home/hiago/sites/blog.hiagobriano.online
-
-          # Baixar as últimas alterações
           git pull origin main
-
-          # Instalar dependências
           npm install
-
-          # Fazer o build
           npm run build
-
-          # Garantir que nenhum servidor anterior esteja rodando
           pm2 delete blog-next || true
-
-          # Iniciar o servidor usando PM2
           pm2 start npm --name "blog-next" -- start
-
-          # Salvar a configuração do PM2 para reiniciar automaticamente após reboot
           pm2 save
         EOF
