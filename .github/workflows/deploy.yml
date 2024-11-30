@@ -31,7 +31,7 @@ jobs:
     # Conectar via SSH e fazer o deploy
     - name: Deploy to VPS
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
         VPS_USER: hiago
         VPS_HOST: 62.72.9.87
       run: |
