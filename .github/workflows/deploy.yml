@@ -34,6 +34,12 @@ jobs:
     - name: Deploy to VPS
       run: |
         ssh hiago@62.72.9.87 << 'EOF'
+          # Verificar se o pm2 está instalado
+          if ! command -v pm2 &> /dev/null; then
+            echo "pm2 não encontrado, instalando..."
+            npm install -g pm2
+          fi
+
           # Navegar para a pasta do projeto
           cd /home/hiago/sites/blog.hiagobriano.online
 
