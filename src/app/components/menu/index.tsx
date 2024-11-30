@@ -9,7 +9,7 @@ import "./style.css";
 export function Navbar() {
   const [isScrolled, setScrolled] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const [isMenuUserOpen, setMenuUserOpen] = useState(false);
+  const [isMenuUserOpen, setMenuUserOpen] = useState(true);
   const [isUserLogged, setUserLogged] = useState(true);
 
   const menuRef = useRef<HTMLUListElement | null>(null);
