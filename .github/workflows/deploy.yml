@@ -1,0 +1,51 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+    # Step 1: Checkout do código
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Configurar o SSH
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+    - name: Add VPS to known_hosts
+      run: |
+        ssh-keyscan -H 62.72.9.87 >> ~/.ssh/known_hosts
+
+    # Step 3: Conectar à VPS e realizar o deploy
+    - name: Deploy to VPS
+      run: |
+        ssh hiago@62.72.9.87 << 'EOF'
+          # Navegar para a pasta do projeto
+          cd /home/hiago/sites/blog.hiagobriano.online
+
+          # Baixar as últimas alterações
+          git pull origin main
+
+          # Instalar dependências
+          npm install
+
+          # Fazer o build
+          npm run build
+
+          # Garantir que nenhum servidor anterior esteja rodando
+          pm2 delete blog-next || true
+
+          # Iniciar o servidor usando PM2
+          pm2 start npm --name "blog-next" -- start
+
+          # Salvar a configuração do PM2 para reiniciar automaticamente após reboot
+          pm2 save
+        EOF

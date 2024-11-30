@@ -9,7 +9,7 @@ import "./style.css";
 export function Navbar() {
   const [isScrolled, setScrolled] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const [isMenuUserOpen, setMenuUserOpen] = useState(true);
+  const [isMenuUserOpen, setMenuUserOpen] = useState(false);
   const [isUserLogged, setUserLogged] = useState(true);
 
   const menuRef = useRef<HTMLUListElement | null>(null);
@@ -89,15 +89,6 @@ export function Navbar() {
           >
             <Link href={item.href}>{item.label}</Link>
             <span className="navbar--menu-underline" />
-            {/* {item.options && (
-              <ul className="navbar--menu-dropdown">
-                {item.options.map((category, index) => (
-                  <li key={`${category}-${index}`}>
-                    <Link href={category.href}>{category.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            )} */}
           </li>
         ))}
       </ul>
