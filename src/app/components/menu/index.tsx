@@ -110,8 +110,8 @@ export function Navbar() {
           {isUserLogged ? (
             <>
               <div>
-                <span>Bonnie Green</span>
-                <span>bonnie_green@hotmail.com</span>
+                <span>Hiago Briano</span>
+                <span>hiago.artist@hotmail.com</span>
               </div>
               <ul>
                 <li>
