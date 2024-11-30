@@ -33,6 +33,15 @@ jobs:
           git pull origin main
           npm install
           npm run build
+
+          # Verificar e instalar o PM2 se necessário
+          if ! command -v pm2 &> /dev/null
+          then
+              echo "PM2 não encontrado. Instalando..."
+              sudo npm install -g pm2
+          fi
+
+          # Gerenciar o aplicativo com PM2
           pm2 delete blog-next || true
           pm2 start npm --name "blog-next" -- start
           pm2 save
