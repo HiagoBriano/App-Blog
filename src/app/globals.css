@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Estilização da barra de rolagem */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #3f3f3f;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Remove as margens, paddings e estilizações padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Remover estilizações padrão de listas */
+ul,
+ol {
+  list-style: none; /* Remove bullets e números */
+  margin: 0;
+  padding: 0;
+}
+
+/* Remover sublinhado padrão de links */
+a {
+  text-decoration: none; /* Remove sublinhado */
+  color: inherit; /* Herda a cor do elemento pai */
+}
+
+/* Ajustar botões */
+button {
+  all: unset; /* Remove estilos padrões */
+  cursor: pointer; /* Adiciona cursor de clique */
+}
+
+body {
+  background-color: var(--background);
+}
+
+:root {
+  --navbar_BgColor: #ffffff;
+  --navbar_TextColor: #15803d;
+  --navbar_UnderlineColor: #00f585;
+  --navbar_hamberColor: #021b0b;
+  --background: #e2e8f0;
+}

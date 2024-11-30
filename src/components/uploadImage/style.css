@@ -1,9 +1,0 @@
-/* .cropper-crop-box,
-.cropper-view-box {
-  border-radius: 100%;
-} */
-
-.rounded-full .cropper-crop-box,
-.rounded-full .cropper-view-box {
-  border-radius: 100%;
-}
