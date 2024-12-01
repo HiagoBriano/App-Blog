@@ -1,0 +1,10 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore build directory do Next.js
+.next/
+
+# Ignore outros diretórios comuns
+out/
+dist/
+coverage/

@@ -45,4 +45,5 @@ jobs:
             pm2 delete blog-next || true
             pm2 start npm --name "blog-next" -- start
             pm2 save
+            sudo systemctl restart apache2
           EOF

@@ -11,6 +11,18 @@ type RootLayoutProps = {
   children: React.ReactNode;
 };
 
+export default async function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html lang="pt-br">
+      <head>
+        <link rel="icon" href="/icon.png" type="image/x-icon" />
+      </head>
+
+      <body>{children}</body>
+    </html>
+  );
+}
+
 // const getDomain = async () => {
 //   const headersList = await headers();
 //   const domain = headersList.get("host") || "localhost";
@@ -36,18 +48,3 @@ type RootLayoutProps = {
 
 //   return data.results[0].picture.thumbnail as string;
 // }
-
-export default async function RootLayout({ children }: RootLayoutProps) {
-  return (
-    <html lang="pt-br">
-      <head>
-        <link rel="icon" href="/icon.png" type="image/x-icon" />
-        <link
-          rel="stylesheet"
-          href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
-        />
-      </head>
-      <body>{children}</body>
-    </html>
-  );
-}
