@@ -22,9 +22,9 @@
 }
 
 .navbar--user-container {
-  display: "flex";
-  gap: "5px";
-  align-content: "center";
+  display: 'flex';
+  gap: '5px';
+  align-content: 'center';
   justify-content: flex-end;
 }
 
@@ -191,7 +191,7 @@
 }
 .navbar--hamburger:before,
 .navbar--hamburger:after {
-  content: "";
+  content: '';
   position: absolute;
   border-radius: var(--s);
   inset: 40% 0;
@@ -229,6 +229,10 @@
 
   .navbar--menu {
     display: none;
+  }
+
+  .navbar--user-dropdown {
+    right: 5rem;
   }
 
   .navbar--menu--active {
