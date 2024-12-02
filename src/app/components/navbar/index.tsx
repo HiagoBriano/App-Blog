@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { User } from './user';
 import Link from 'next/link';
@@ -10,6 +10,7 @@ import './style.css';
 export function Navbar() {
   const [isScrolled, setScrolled] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLUListElement>(null);
 
   //  useEffect abaixo dedicado ao scroll
   useEffect(() => {
@@ -19,6 +20,20 @@ export function Navbar() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // fecha o menu ao clicar fora
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const categoies = [
@@ -45,6 +60,7 @@ export function Navbar() {
       <ul
         className={`flex-1 flex items-center justify-center gap-4 transition-all ease-in-out duration-500 ${isScrolled ? '' : 'text-lg'} navbar--menu ${isMenuOpen && 'navbar--menu--active'}`}
         style={{ fontFamily: "'Montserrat', sans-serif" }}
+        ref={menuRef}
       >
         {menuItems.map((item, index) => {
           // if (item.options) {
