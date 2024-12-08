@@ -2,15 +2,20 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { LoginModel } from '../../LoginModel';
 
 export function User() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
+  const [isOpenRegister, setOpenRegister] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const registeredUser = false;
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+        setOpen(false);
       }
     }
 
@@ -32,7 +37,13 @@ export function User() {
       <button
         type="button"
         className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          if (!registeredUser) {
+            setOpenRegister(true);
+          } else {
+            setOpen((prev) => !prev);
+          }
+        }}
       >
         <span className="sr-only">abrir menu de usuário</span>
         <Image
@@ -47,25 +58,30 @@ export function User() {
       <div
         className={`z-50 my-4 text-base list-none  bg-white divide-y divide-gray-100 rounded-lg shadow absolute right-2 ${isOpen ? 'block' : 'hidden'}`}
       >
-        <div className="px-4 py-3">
-          <span className="block text-sm text-gray-900">Hiago Briano</span>
-          <span className="block text-sm  text-gray-500 truncate">
-            hiago.artist@hotmail.com
-          </span>
-        </div>
-        <ul className="py-2" aria-labelledby="user-menu-button">
-          {options.map((option, index) => (
-            <li key={index}>
-              <a
-                href={option.href}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
-              >
-                {option.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {registeredUser && (
+          <>
+            <div className="px-4 py-3">
+              <span className="block text-sm text-gray-900">Hiago Briano</span>
+              <span className="block text-sm  text-gray-500 truncate">
+                hiago.artist@hotmail.com
+              </span>
+            </div>
+            <ul className="py-2" aria-labelledby="user-menu-button">
+              {options.map((option, index) => (
+                <li key={index}>
+                  <Link
+                    href={option.href}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                  >
+                    {option.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
+      <LoginModel open={isOpenRegister} close={() => setOpenRegister(false)} />
     </div>
   );
 }
